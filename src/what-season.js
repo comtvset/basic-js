@@ -14,6 +14,10 @@ const { NotImplementedError } = require('../extensions/index.js');
 function getSeason(date) {
   let message = 'The season is not certain';
 
+  if (!(date instanceof Date) || isNaN(date)) {
+    throw new Error('Invalid date!');
+  }
+
   if (arguments.length > 0) {
     let month = date.getUTCMonth();
 
