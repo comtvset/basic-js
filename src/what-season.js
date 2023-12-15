@@ -12,39 +12,41 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function getSeason(date) {
-  let message = 'The season is not certain';
+    if (typeof date === 'undefined') {
+        return 'Unable to determine the time of year!';
+    }
 
-  if (!(date instanceof Date) || isNaN(date)) {
-    throw new Error('Invalid date!');
-  }
+    try {
+        date.getTime();
+    } catch (error) {
+        throw new Error('Invalid date!');
+    }
 
-  if (arguments.length > 0) {
     let month = date.getUTCMonth();
 
     switch (month) {
-      case 2:
-      case 3:
-      case 4:
-        message = 'spring';
-        break;
-      case 5:
-      case 6:
-      case 7:
-        message = 'summer';
-        break;
-      case 8:
-      case 9:
-      case 10:
-        message = 'autumn';
-        break;
-      default:
-        message = 'winter';
-    };
-  }
+        case 2:
+        case 3:
+        case 4:
+            message = 'spring';
+            break;
+        case 5:
+        case 6:
+        case 7:
+            message = 'summer';
+            break;
+        case 8:
+        case 9:
+        case 10:
+            message = 'autumn';
+            break;
+        default:
+            message = 'winter';
+    }
 
-  return message;
+    return message;
 }
 
 module.exports = {
-  getSeason
+    getSeason,
 };
